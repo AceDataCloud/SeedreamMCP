@@ -4,6 +4,7 @@ from typing import Literal
 
 # Seedream model types
 SeedreamModel = Literal[
+    "doubao-seedream-5-0-260128",
     "doubao-seedream-4-5-251128",
     "doubao-seedream-4-0-250828",
     "doubao-seedream-3-0-t2i-250415",
@@ -11,7 +12,10 @@ SeedreamModel = Literal[
 ]
 
 # Image size presets
-SeedreamSize = Literal["1K", "2K", "4K", "adaptive"]
+SeedreamSize = Literal["1K", "2K", "3K", "4K", "adaptive"]
+
+# Output image format
+OutputFormat = Literal["jpeg", "png"]
 
 # Sequential image generation mode
 SequentialMode = Literal["auto", "disabled"]
