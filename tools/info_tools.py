@@ -19,7 +19,8 @@ async def seedream_list_models() -> str:
 
 | Model | Version | Type | Features | Price |
 |-------|---------|------|----------|-------|
-| `doubao-seedream-4-5-251128` | v4.5 | Text-to-Image | Latest flagship, best quality, sequential generation, streaming | ~$0.037/image |
+| `doubao-seedream-5-0-260128` | v5.0 | Text-to-Image | Latest flagship, best quality, 3K resolution, web search, sequential generation, streaming | ~$0.040/image |
+| `doubao-seedream-4-5-251128` | v4.5 | Text-to-Image | High quality, sequential generation, streaming | ~$0.037/image |
 | `doubao-seedream-4-0-250828` | v4.0 | Text-to-Image | Stable, cost-effective, sequential generation, streaming | ~$0.030/image |
 | `doubao-seedream-3-0-t2i-250415` | v3.0 | Text-to-Image | Seed control, guidance scale, reproducible results | ~$0.038/image |
 | `doubao-seededit-3-0-i2i-250628` | v3.0 | Image-to-Image | Image editing, style transfer, seed control, guidance scale | ~$0.046/image |
@@ -27,14 +28,19 @@ async def seedream_list_models() -> str:
 ## Model Selection Guide
 
 ### For Best Quality
-→ **doubao-seedream-4-5-251128** (v4.5)
+→ **doubao-seedream-5-0-260128** (v5.0)
 - Latest flagship model with cutting-edge quality
 - Best for professional/commercial use
+- Supports 3K resolution and web search
+
+### For High Quality
+→ **doubao-seedream-4-5-251128** (v4.5)
+- Excellent quality with sequential generation
 
 ### For Best Value
 → **doubao-seedream-4-0-250828** (v4.0)
 - Great balance of quality and cost
-- Recommended for most use cases
+- Recommended for cost-effective use cases
 
 ### For Reproducible Results
 → **doubao-seedream-3-0-t2i-250415** (v3.0 T2I)
@@ -49,15 +55,17 @@ async def seedream_list_models() -> str:
 
 ## Feature Comparison
 
-| Feature | v4.5 | v4.0 | v3.0 T2I | v3.0 I2I (Edit) |
-|---------|------|------|----------|-----------------|
-| Text-to-Image | ✅ | ✅ | ✅ | ❌ |
-| Image Editing | ❌ | ❌ | ❌ | ✅ |
-| Seed Control | ❌ | ❌ | ✅ | ✅ |
-| Guidance Scale | ❌ | ❌ | ✅ (default 2.5) | ✅ (default 5.5) |
-| Sequential Gen | ✅ | ✅ | ❌ | ❌ |
-| Streaming | ✅ | ✅ | ❌ | ❌ |
-| Resolution | 1K/2K/4K/Adaptive | 1K/2K/4K/Adaptive | 1K/2K/4K/Adaptive | 1K/2K/4K/Adaptive |
+| Feature | v5.0 | v4.5 | v4.0 | v3.0 T2I | v3.0 I2I (Edit) |
+|---------|------|------|------|----------|-----------------|
+| Text-to-Image | ✅ | ✅ | ✅ | ✅ | ❌ |
+| Image Editing | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Seed Control | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Guidance Scale | ❌ | ❌ | ❌ | ✅ (default 2.5) | ✅ (default 5.5) |
+| Sequential Gen | ✅ | ✅ | ✅ | ❌ | ❌ |
+| Streaming | ✅ | ✅ | ✅ | ❌ | ❌ |
+| 3K Resolution | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Web Search | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Resolution | 1K/2K/3K/4K/Adaptive | 1K/2K/4K/Adaptive | 1K/2K/4K/Adaptive | 1K/2K/4K/Adaptive | 1K/2K/4K/Adaptive |
 """
 
 
@@ -81,6 +89,7 @@ async def seedream_list_sizes() -> str:
 |------|-------------|----------|
 | `1K` | ~1024px (default) | General use, fast generation |
 | `2K` | ~2048px | Higher detail, print-ready |
+| `3K` | ~3072px | Extra detail (v5.0 only) |
 | `4K` | ~4096px | Maximum quality, large prints |
 | `adaptive` | Auto-selected based on content | Let the model choose optimal size |
 

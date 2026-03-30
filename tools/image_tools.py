@@ -6,7 +6,14 @@ from pydantic import Field
 
 from core.client import client
 from core.server import mcp
-from core.types import ResponseFormat, SeedreamModel, SeedreamSize, SequentialMode
+from core.types import (
+    OutputFormat,
+    ResponseFormat,
+    SeedreamModel,
+    SeedreamSize,
+    SequentialMode,
+    ToolConfig,
+)
 from core.utils import format_image_result
 
 
@@ -25,17 +32,19 @@ async def seedream_generate_image(
         SeedreamModel,
         Field(
             description="Model to use for generation. "
-            "'doubao-seedream-4-5-251128' (v4.5, latest flagship, best quality). "
+            "'doubao-seedream-5-0-260128' (v5.0, latest flagship, best quality, supports 3K/web_search). "
+            "'doubao-seedream-4-5-251128' (v4.5, high quality, sequential generation, streaming). "
             "'doubao-seedream-4-0-250828' (v4.0, stable, best value). "
             "'doubao-seedream-3-0-t2i-250415' (v3 text-to-image, supports seed and guidance_scale). "
             "'doubao-seededit-3-0-i2i-250628' is for image editing only — use seedream_edit_image "
             "instead."
         ),
-    ] = "doubao-seedream-4-0-250828",
+    ] = "doubao-seedream-5-0-260128",
     size: Annotated[
         SeedreamSize | None,
         Field(
-            description="Output image resolution. '1K' (default), '2K', '4K', or 'adaptive'. "
+            description="Output image resolution. '1K' (default), '2K', '3K', '4K', or 'adaptive'. "
+            "'3K' is only supported for v5.0 (doubao-seedream-5-0-260128). "
             "You can also specify custom dimensions like '1024x1024', '1280x720', etc."
         ),
     ] = None,
@@ -51,14 +60,14 @@ async def seedream_generate_image(
         SequentialMode | None,
         Field(
             description="Generate related images based on input. 'auto' enables it, 'disabled' "
-            "(default) turns it off. Only supports v4.5 and v4.0 models."
+            "(default) turns it off. Only supports v5.0, v4.5, and v4.0 models."
         ),
     ] = None,
     stream: Annotated[
         bool | None,
         Field(
             description="Stream all pictures progressively. Default is false. "
-            "Only supports v4.5 and v4.0 models."
+            "Only supports v5.0, v4.5, and v4.0 models."
         ),
     ] = None,
     guidance_scale: Annotated[
@@ -79,6 +88,21 @@ async def seedream_generate_image(
     watermark: Annotated[
         bool | None,
         Field(description="Whether to add an AI-generated watermark. Default is true."),
+    ] = None,
+    output_format: Annotated[
+        OutputFormat | None,
+        Field(
+            description="Output image file format. 'jpeg' (default) or 'png'. "
+            "Only supported for v5.0 (doubao-seedream-5-0-260128)."
+        ),
+    ] = None,
+    tools: Annotated[
+        list[ToolConfig] | None,
+        Field(
+            description="Tools for the model to use. Currently only supports "
+            "[{'type': 'web_search'}] to enable web search. "
+            "Only supported for v5.0 (doubao-seedream-5-0-260128)."
+        ),
     ] = None,
     callback_url: Annotated[
         str,
@@ -105,7 +129,8 @@ async def seedream_generate_image(
     - You need to combine multiple images (use seedream_edit_image instead)
 
     Model selection guide:
-    - v4.5 (doubao-seedream-4-5-251128): Latest flagship, best quality and detail
+    - v5.0 (doubao-seedream-5-0-260128): Latest flagship, best quality, supports 3K and web_search
+    - v4.5 (doubao-seedream-4-5-251128): High quality, sequential generation and streaming
     - v4.0 (doubao-seedream-4-0-250828): Stable and cost-effective, great for most tasks
     - v3 T2I (doubao-seedream-3-0-t2i-250415): Supports seed for reproducibility
 
@@ -132,6 +157,10 @@ async def seedream_generate_image(
         payload["response_format"] = response_format
     if watermark is not None:
         payload["watermark"] = watermark
+    if output_format is not None:
+        payload["output_format"] = output_format
+    if tools is not None:
+        payload["tools"] = tools
     if callback_url:
         payload["callback_url"] = callback_url
 

@@ -322,6 +322,7 @@ Clients connect with their own Bearer token — the server extracts the token fr
 
 | Model | Version | Type | Best For | Price |
 |-------|---------|------|----------|-------|
+| `doubao-seedream-5-0-260128` | v5.0 | Text-to-Image | Latest quality, 3K, web search | ~$0.040/image |
 | `doubao-seedream-4-5-251128` | v4.5 | Text-to-Image | Best quality, flagship | ~$0.037/image |
 | `doubao-seedream-4-0-250828` | v4.0 | Text-to-Image | Best value, most tasks | ~$0.030/image |
 | `doubao-seedream-3-0-t2i-250415` | v3.0 | Text-to-Image | Reproducible results | ~$0.038/image |
