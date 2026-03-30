@@ -25,3 +25,6 @@ ResponseFormat = Literal["url", "b64_json"]
 
 # Task action types
 TaskAction = Literal["retrieve", "retrieve_batch"]
+
+# Tool types for model tool use
+WebSearchToolType = Literal["web_search"]

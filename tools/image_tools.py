@@ -6,7 +6,14 @@ from pydantic import Field
 
 from core.client import client
 from core.server import mcp
-from core.types import OutputFormat, ResponseFormat, SeedreamModel, SeedreamSize, SequentialMode
+from core.types import (
+    OutputFormat,
+    ResponseFormat,
+    SeedreamModel,
+    SeedreamSize,
+    SequentialMode,
+    WebSearchToolType,
+)
 from core.utils import format_image_result
 
 
@@ -93,6 +100,14 @@ async def seedream_generate_image(
             "Must be publicly accessible."
         ),
     ] = "",
+    tools: Annotated[
+        list[WebSearchToolType] | None,
+        Field(
+            description="Optional list of tool types for the model to use during generation. "
+            "Currently only 'web_search' is supported. "
+            "Only supported by doubao-seedream-5-0-260128 (v5.0)."
+        ),
+    ] = None,
 ) -> str:
     """Generate an AI image from a text prompt using ByteDance's Seedream model.
 
@@ -142,6 +157,8 @@ async def seedream_generate_image(
         payload["output_format"] = output_format
     if callback_url:
         payload["callback_url"] = callback_url
+    if tools is not None:
+        payload["tools"] = [{"type": t} for t in tools]
 
     result = await client.generate_image(**payload)
     return format_image_result(result)
