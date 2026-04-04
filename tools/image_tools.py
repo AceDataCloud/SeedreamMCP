@@ -192,7 +192,9 @@ async def seedream_edit_image(
     ] = "doubao-seededit-3-0-i2i-250628",
     size: Annotated[
         SeedreamSize | None,
-        Field(description="Output image resolution. '1K' (default), '2K', '3K', '4K', or 'adaptive'."),
+        Field(
+            description="Output image resolution. '1K' (default), '2K', '3K', '4K', or 'adaptive'."
+        ),
     ] = None,
     seed: Annotated[
         int | None,
