@@ -1,4 +1,4 @@
-# MCP Seedream
+# SeedreamMCP
 
 <!-- mcp-name: io.github.AceDataCloud/mcp-seedream-pro -->
 
