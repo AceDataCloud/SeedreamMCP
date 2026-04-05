@@ -23,6 +23,17 @@ Generate and edit AI images directly from Claude, VS Code, or any MCP-compatible
 - **Streaming** — Progressive image delivery (v4.5/v4.0)
 - **Task Tracking** — Monitor generation progress and retrieve results
 
+## Tool Reference
+
+| Tool | Description |
+|------|-------------|
+| `seedream_generate_image` | Generate an AI image from a text prompt using ByteDance's Seedream model. |
+| `seedream_edit_image` | Edit or modify existing images using ByteDance's Seedream/SeedEdit model. |
+| `seedream_get_task` | Query the status and result of a Seedream image generation or edit task. |
+| `seedream_get_tasks_batch` | Query multiple Seedream image tasks at once. |
+| `seedream_list_models` | List all available Seedream models with their capabilities and pricing. |
+| `seedream_list_sizes` | List all available image sizes and resolution options for Seedream. |
+
 ## Quick Start
 
 ### 1. Get Your API Token

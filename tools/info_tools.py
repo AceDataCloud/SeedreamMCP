@@ -15,6 +15,7 @@ async def seedream_list_models() -> str:
     Returns:
         Formatted table of all Seedream models with descriptions.
     """
+    # Last updated: 2026-04-05
     return """# Available Seedream Models
 
 | Model | Version | Type | Features | Price |
@@ -80,6 +81,7 @@ async def seedream_list_sizes() -> str:
     Returns:
         Formatted list of all size options with descriptions.
     """
+    # Last updated: 2026-04-05
     return """# Seedream Image Size Options
 
 ## Preset Sizes
