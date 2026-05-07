@@ -62,6 +62,14 @@ async def seedream_generate_image(
             "(default) turns it off. Only supports v4.5 and v4.0 models."
         ),
     ] = None,
+    sequential_image_generation_options: Annotated[
+        dict | None,
+        Field(
+            description="Tunable options for grouped image generation. Only honored when "
+            "`sequential_image_generation=auto`. Supports `max_images` (int, range [1, 15]). "
+            "Only supported on doubao-seedream-4.5 and doubao-seedream-4.0."
+        ),
+    ] = None,
     stream: Annotated[
         bool | None,
         Field(
@@ -108,6 +116,14 @@ async def seedream_generate_image(
             "Only supported by doubao-seedream-5-0-260128 (v5.0)."
         ),
     ] = None,
+    optimize_prompt_options: Annotated[
+        dict | None,
+        Field(
+            description="Optional prompt optimization configuration. Supports `mode` with values "
+            "'standard' (higher quality, slower) or 'fast' (quicker, lower quality). "
+            "Only supported on doubao-seedream-4.5 (standard mode only) and doubao-seedream-4.0."
+        ),
+    ] = None,
 ) -> str:
     """Generate an AI image from a text prompt using ByteDance's Seedream model.
 
@@ -145,6 +161,8 @@ async def seedream_generate_image(
         payload["seed"] = seed
     if sequential_image_generation is not None:
         payload["sequential_image_generation"] = sequential_image_generation
+    if sequential_image_generation_options is not None:
+        payload["sequential_image_generation_options"] = sequential_image_generation_options
     if stream is not None:
         payload["stream"] = stream
     if guidance_scale is not None:
@@ -159,6 +177,8 @@ async def seedream_generate_image(
         payload["callback_url"] = callback_url
     if tools is not None:
         payload["tools"] = [{"type": t} for t in tools]
+    if optimize_prompt_options is not None:
+        payload["optimize_prompt_options"] = optimize_prompt_options
 
     result = await client.generate_image(**payload)
     return format_image_result(result)
