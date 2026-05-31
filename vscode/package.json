@@ -2,12 +2,12 @@
   "name": "mcp-seedream",
   "displayName": "Seedream MCP",
   "description": "Seedream by ByteDance — text-to-image and SeedEdit instruction-based editing.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "publisher": "acedatacloud",
   "icon": "icon.png",
   "license": "MIT",
   "engines": {
-    "vscode": "^1.99.0"
+    "vscode": "^1.101.0"
   },
   "categories": [
     "AI",
@@ -37,22 +37,25 @@
   "bugs": {
     "url": "https://github.com/AceDataCloud/SeedreamMCP/issues"
   },
+  "activationEvents": [],
+  "main": "./extension.js",
   "contributes": {
-    "mcpServers": {
-      "seedream": {
-        "type": "http",
-        "url": "https://seedream.mcp.acedata.cloud/mcp",
-        "headers": {
-          "Authorization": "Bearer ${input:acedatacloud_api_token}"
-        }
-      }
-    },
-    "inputs": [
+    "mcpServerDefinitionProviders": [
       {
-        "type": "promptString",
-        "id": "acedatacloud_api_token",
-        "description": "Ace Data Cloud API token. Sign in at https://platform.acedata.cloud and create a token in 'API Keys'. Stored securely by VS Code.",
-        "password": true
+        "id": "acedatacloud.seedream",
+        "label": "Seedream MCP"
+      }
+    ],
+    "commands": [
+      {
+        "command": "acedatacloud.seedream.setApiToken",
+        "title": "Seedream MCP: Set Ace Data Cloud API Key",
+        "category": "MCP"
+      },
+      {
+        "command": "acedatacloud.seedream.clearApiToken",
+        "title": "Seedream MCP: Clear Ace Data Cloud API Key",
+        "category": "MCP"
       }
     ]
   }
