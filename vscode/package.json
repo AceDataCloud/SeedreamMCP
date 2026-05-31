@@ -1,8 +1,8 @@
 {
-  "name": "mcp-seedream",
+  "name": "mcp-seedream-pro",
   "displayName": "Seedream MCP",
-  "description": "AI Image Generation with ByteDance Seedream - Generate and edit images via Ace Data Cloud API",
-  "version": "0.1.0",
+  "description": "Seedream by ByteDance — text-to-image and SeedEdit instruction-based editing.",
+  "version": "0.2.0",
   "publisher": "acedatacloud",
   "icon": "icon.png",
   "license": "MIT",
@@ -20,10 +20,15 @@
     "copilot",
     "ace data cloud",
     "seedream",
-    "image generation",
     "bytedance",
-    "ai art"
+    "image generation",
+    "seededit",
+    "image editing"
   ],
+  "galleryBanner": {
+    "color": "#0E1117",
+    "theme": "dark"
+  },
   "homepage": "https://github.com/AceDataCloud/SeedreamMCP",
   "repository": {
     "type": "git",
@@ -35,14 +40,20 @@
   "contributes": {
     "mcpServers": {
       "seedream": {
-        "command": "uvx",
-        "args": [
-          "mcp-seedream-pro"
-        ],
-        "env": {
-          "ACEDATACLOUD_API_TOKEN": ""
+        "type": "http",
+        "url": "https://seedream.mcp.acedata.cloud/mcp",
+        "headers": {
+          "Authorization": "Bearer ${input:acedatacloud_api_token}"
         }
       }
-    }
+    },
+    "inputs": [
+      {
+        "type": "promptString",
+        "id": "acedatacloud_api_token",
+        "description": "Ace Data Cloud API token. Sign in at https://platform.acedata.cloud and create a token in 'API Keys'. Stored securely by VS Code.",
+        "password": true
+      }
+    ]
   }
 }
