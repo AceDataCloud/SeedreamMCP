@@ -2,7 +2,7 @@
 
 Seedream by ByteDance — text-to-image and SeedEdit instruction-based editing.
 
-[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/acedatacloud.mcp-seedream-pro?label=VS%20Code)](https://marketplace.visualstudio.com/items?itemName=acedatacloud.mcp-seedream-pro) [![PyPI](https://img.shields.io/pypi/v/mcp-seedream-pro.svg?label=PyPI)](https://pypi.org/project/mcp-seedream-pro/) [![Hosted MCP](https://img.shields.io/badge/hosted-mcp-blue)](https://seedream.mcp.acedata.cloud/mcp)
+[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/acedatacloud.mcp-seedream?label=VS%20Code)](https://marketplace.visualstudio.com/items?itemName=acedatacloud.mcp-seedream) [![PyPI](https://img.shields.io/pypi/v/mcp-seedream-pro.svg?label=PyPI)](https://pypi.org/project/mcp-seedream-pro/) [![Hosted MCP](https://img.shields.io/badge/hosted-mcp-blue)](https://seedream.mcp.acedata.cloud/mcp)
 
 High-resolution image generation and edit-by-instruction with ByteDance Seedream (3.0 / 4.0 / 4.5 / 5.0) and SeedEdit 3.0.
 
@@ -25,6 +25,13 @@ You can rotate or remove the API key any time from the command palette:
 
 > The default config talks to the **hosted streamable-HTTP endpoint** at
 > `https://seedream.mcp.acedata.cloud/mcp` — no Python, no `uvx`, no local install needed.
+
+## VS Code Setup Guide
+
+For screenshots, token setup, project-level and user-level `mcp.json`, and Copilot Agent Mode examples, see:
+
+- [Seedream MCP VS Code guide](https://platform.acedata.cloud/documents/promotion_article_mcp_seedream_vscode)
+- [All Ace Data Cloud MCP servers in VS Code](https://platform.acedata.cloud/documents/promotion_article_mcp_all_vscode)
 
 ### Example prompts
 
@@ -89,7 +96,7 @@ this extension.
     {
       "type": "promptString",
       "id": "acedatacloud_api_token",
-    "description": "Ace Data Cloud API key",
+      "description": "Ace Data Cloud API key",
       "password": true
     }
   ]
