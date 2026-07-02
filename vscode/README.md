@@ -2,7 +2,7 @@
 
 Seedream by ByteDance — text-to-image and SeedEdit instruction-based editing.
 
-[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/acedatacloud.mcp-seedream?label=VS%20Code)](https://marketplace.visualstudio.com/items?itemName=acedatacloud.mcp-seedream) [![PyPI](https://img.shields.io/pypi/v/mcp-seedream-pro.svg?label=PyPI)](https://pypi.org/project/mcp-seedream-pro/) [![Hosted MCP](https://img.shields.io/badge/hosted-mcp-blue)](https://seedream.mcp.acedata.cloud/mcp)
+[![VS Code Marketplace](https://img.shields.io/badge/VS%20Code-Marketplace-blue?logo=visualstudiocode&logoColor=white)](https://marketplace.visualstudio.com/items?itemName=acedatacloud.mcp-seedream) [![PyPI](https://img.shields.io/pypi/v/mcp-seedream-pro.svg?label=PyPI)](https://pypi.org/project/mcp-seedream-pro/) [![Hosted MCP](https://img.shields.io/badge/hosted-mcp-blue)](https://seedream.mcp.acedata.cloud/mcp)
 
 High-resolution image generation and edit-by-instruction with ByteDance Seedream (3.0 / 4.0 / 4.5 / 5.0) and SeedEdit 3.0.
 
