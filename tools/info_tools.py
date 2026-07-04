@@ -21,6 +21,7 @@ async def seedream_list_models() -> str:
 | Model | Version | Type | Features | Price |
 |-------|---------|------|----------|-------|
 | `doubao-seedream-5-0-260128` | v5.0 | Text-to-Image | Latest flagship, highest quality, sequential generation, streaming, web search | ~$0.040/image |
+| `doubao-seedream-5.0-lite` | v5.0 | Text-to-Image | Economy v5.0 variant, faster and lower cost | lower cost |
 | `doubao-seedream-4-5-251128` | v4.5 | Text-to-Image | Previous flagship, great quality, sequential generation, streaming | ~$0.037/image |
 | `doubao-seedream-4-0-250828` | v4.0 | Text-to-Image | Stable, cost-effective, sequential generation, streaming | ~$0.030/image |
 | `doubao-seedream-3-0-t2i-250415` | v3.0 | Text-to-Image | Seed control, guidance scale, reproducible results | ~$0.038/image |
