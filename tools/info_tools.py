@@ -20,7 +20,8 @@ async def seedream_list_models() -> str:
 
 | Model | Version | Type | Features | Price |
 |-------|---------|------|----------|-------|
-| `doubao-seedream-5-0-260128` | v5.0 | Text-to-Image | Latest flagship, highest quality, sequential generation, streaming, web search | ~$0.040/image |
+| `doubao-seedream-5-0-pro-260628` | v5.0 Pro | Text-to-Image | Flagship single image, highest quality. No sequential/streaming/web search | ~$0.044-0.088/image |
+| `doubao-seedream-5-0-260128` | v5.0 Lite | Text-to-Image | Latest flagship, highest quality, sequential generation, streaming, web search | ~$0.040/image |
 | `doubao-seedream-5.0-lite` | v5.0 | Text-to-Image | Economy v5.0 variant, faster and lower cost | lower cost |
 | `doubao-seedream-4-5-251128` | v4.5 | Text-to-Image | Previous flagship, great quality, sequential generation, streaming | ~$0.037/image |
 | `doubao-seedream-4-0-250828` | v4.0 | Text-to-Image | Stable, cost-effective, sequential generation, streaming | ~$0.030/image |
@@ -29,10 +30,16 @@ async def seedream_list_models() -> str:
 
 ## Model Selection Guide
 
-### For Best Quality
-→ **doubao-seedream-5-0-260128** (v5.0)
-- Latest flagship model with highest quality
-- Best for professional/commercial use
+### For Best Quality (single image)
+→ **doubao-seedream-5-0-pro-260628** (v5.0 Pro)
+- Flagship single-image model with highest quality
+- Best for professional/commercial single images
+- Note: does NOT support sequential generation, streaming, or web search
+
+### For Sequential / Streaming (v5.0)
+→ **doubao-seedream-5-0-260128** (v5.0 Lite)
+- Latest flagship with sequential generation, streaming, web search
+- Best when you need image sets or progressive output
 
 ### For Previous Flagship Quality
 → **doubao-seedream-4-5-251128** (v4.5)
@@ -57,16 +64,17 @@ async def seedream_list_models() -> str:
 
 ## Feature Comparison
 
-| Feature | v5.0 | v4.5 | v4.0 | v3.0 T2I | v3.0 I2I (Edit) |
-|---------|------|------|------|----------|-----------------|
-| Text-to-Image | ✅ | ✅ | ✅ | ✅ | ❌ |
-| Image Editing | ❌ | ❌ | ❌ | ❌ | ✅ |
-| Seed Control | ❌ | ❌ | ❌ | ✅ | ✅ |
-| Guidance Scale | ❌ | ❌ | ❌ | ✅ (default 2.5) | ✅ (default 5.5) |
-| Sequential Gen | ✅ | ✅ | ✅ | ❌ | ❌ |
-| Streaming | ✅ | ✅ | ✅ | ❌ | ❌ |
-| Web Search | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Resolution | 1K/2K/3K/4K/Adaptive | 1K/2K/3K/4K/Adaptive | 1K/2K/3K/4K/Adaptive | 1K/2K/3K/4K/Adaptive | 1K/2K/3K/4K/Adaptive |
+| Feature | v5.0 Pro | v5.0 Lite | v4.5 | v4.0 | v3.0 T2I | v3.0 I2I (Edit) |
+|---------|----------|-----------|------|------|----------|-----------------|
+| Text-to-Image | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
+| Image Editing | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Seed Control | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Guidance Scale | ❌ | ❌ | ❌ | ❌ | ✅ (default 2.5) | ✅ (default 5.5) |
+| Sequential Gen | ❌ | ✅ | ✅ | ✅ | ❌ | ❌ |
+| Streaming | ❌ | ✅ | ✅ | ✅ | ❌ | ❌ |
+| Web Search | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Output Format | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Resolution | 1K/2K | 1K/2K/3K/4K/Adaptive | 1K/2K/3K/4K/Adaptive | 1K/2K/3K/4K/Adaptive | 1K/2K/3K/4K/Adaptive | 1K/2K/3K/4K/Adaptive |
 """
 
 

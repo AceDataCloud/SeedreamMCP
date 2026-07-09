@@ -32,7 +32,9 @@ async def seedream_generate_image(
         SeedreamModel,
         Field(
             description="Model to use for generation. "
-            "'doubao-seedream-5-0-260128' (v5.0, latest flagship, highest quality). "
+            "'doubao-seedream-5-0-pro-260628' (v5.0 Pro, flagship single image, highest quality; "
+            "no sequential generation, streaming, or web search). "
+            "'doubao-seedream-5-0-260128' (v5.0 Lite, latest flagship, sequential generation, streaming, web search). "
             "'doubao-seedream-5.0-lite' (v5.0 economy variant, faster and lower cost). "
             "'doubao-seedream-4-5-251128' (v4.5, previous flagship, great quality). "
             "'doubao-seedream-4-0-250828' (v4.0, stable, best value). "
