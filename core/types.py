@@ -5,9 +5,7 @@ from typing import Literal
 # Seedream model types
 SeedreamModel = Literal[
     "doubao-seedream-5-0-pro-260628",
-    "doubao-seedream-5.0-pro",
     "doubao-seedream-5-0-260128",
-    "doubao-seedream-5.0-lite",
     "doubao-seedream-4-5-251128",
     "doubao-seedream-4-0-250828",
     "doubao-seedream-3-0-t2i-250415",
