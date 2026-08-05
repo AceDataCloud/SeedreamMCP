@@ -22,9 +22,10 @@ When the user wants to generate or edit images, choose the appropriate tool base
 - User describes a scene, object, person, concept, or artwork
 
 **Model selection:**
+- v5.0 Pro (`doubao-seedream-5-0-pro-260628`): Best single-image quality
+- v5.0 Lite (`doubao-seedream-5-0-260128`): Best for image sets, streaming, or web search
 - v4.5 (`doubao-seedream-4-5-251128`): Best quality, latest flagship
 - v4.0 (`doubao-seedream-4-0-250828`): Best value, stable and reliable (recommended default)
-- v3.0 T2I (`doubao-seedream-3-0-t2i-250415`): When seed/reproducibility is needed
 
 **Example:** "Create an image of a futuristic cityscape at sunset"
 → Call `seedream_generate_image` with a detailed prompt
@@ -38,8 +39,8 @@ When the user wants to generate or edit images, choose the appropriate tool base
 - User wants to combine or transform images
 
 **Model selection:**
-- `doubao-seededit-3-0-i2i-250628`: Dedicated editing model (recommended)
-- Other models can also accept image input
+- `doubao-seedream-5-0-260128`: Recommended for most edits
+- 5.0 Pro, 4.5, and 4.0 also accept image input
 
 **Example:** "Change the background of this photo to a beach"
 → Call `seedream_edit_image` with image URL and edit description
@@ -74,8 +75,7 @@ When the user wants to generate or edit images, choose the appropriate tool base
 2. Detailed prompts produce significantly better results
 3. Supports both Chinese and English prompts
 4. The v4.5 model produces the highest quality but costs slightly more
-5. Use seed parameter (v3 models only) when reproducibility is important
-6. For editing, ensure image URLs are publicly accessible or use base64
+5. For editing, ensure image URLs are publicly accessible or use base64
 """
 
 
@@ -179,19 +179,10 @@ def seedream_workflow_examples() -> str:
      prompt="Change the background to outer space with stars and nebulae,
      keep the subject unchanged",
      image=["https://example.com/photo.jpg"],
-     model="doubao-seededit-3-0-i2i-250628"
+    model="doubao-seedream-5-0-260128"
    )`
 
-## Workflow 4: Reproducible Generation with Seed
-1. User: "Generate a cat, and I want to be able to recreate the exact same image"
-2. Call `seedream_generate_image(
-     prompt="A fluffy orange tabby cat sitting on a windowsill, soft natural light",
-     model="doubao-seedream-3-0-t2i-250415",
-     seed=42
-   )`
-3. Note: Same prompt + same seed = same image (v3 models only)
-
-## Workflow 5: Sequential Image Generation
+  ## Workflow 4: Sequential Image Generation
 1. User: "Generate a series of related images about space exploration"
 2. Call `seedream_generate_image(
      prompt="Space exploration series: astronaut on Mars surface, red landscape,
@@ -200,12 +191,12 @@ def seedream_workflow_examples() -> str:
      sequential_image_generation="auto"
    )`
 
-## Workflow 6: Batch Status Check
+## Workflow 5: Batch Status Check
 1. After generating multiple images, collect all task_ids
 2. Call `seedream_get_tasks_batch(task_ids=["task-1", "task-2", "task-3"])`
 3. Get status of all images at once
 
-## Workflow 7: Async with Callback
+## Workflow 6: Async with Callback
 1. User has a webhook endpoint
 2. Call `seedream_generate_image(
      prompt="...",
@@ -218,7 +209,6 @@ def seedream_workflow_examples() -> str:
 - Always use detailed, descriptive prompts
 - Start with v4.0 for best value, upgrade to v4.5 for premium quality
 - For editing, image URLs must be publicly accessible
-- Use seed parameter with v3 models for reproducibility
 - Store task_ids for later status checking
 - Seedream excels at both Chinese and English prompts
 """

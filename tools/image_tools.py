@@ -36,10 +36,7 @@ async def seedream_generate_image(
             "no sequential generation, streaming, or web search). "
             "'doubao-seedream-5-0-260128' (v5.0 Lite, latest flagship, sequential generation, streaming, web search). "
             "'doubao-seedream-4-5-251128' (v4.5, previous flagship, great quality). "
-            "'doubao-seedream-4-0-250828' (v4.0, stable, best value). "
-            "'doubao-seedream-3-0-t2i-250415' (v3 text-to-image, supports seed and guidance_scale). "
-            "'doubao-seededit-3-0-i2i-250628' is for image editing only — use seedream_edit_image "
-            "instead."
+            "'doubao-seedream-4-0-250828' (v4.0, stable, best value)."
         ),
     ] = "doubao-seedream-5-0-260128",
     size: Annotated[
@@ -47,14 +44,6 @@ async def seedream_generate_image(
         Field(
             description="Output image resolution. '1K' (default), '2K', '3K', '4K', or 'adaptive'. "
             "You can also specify custom dimensions like '1024x1024', '1280x720', etc."
-        ),
-    ] = None,
-    seed: Annotated[
-        int | None,
-        Field(
-            description="Random seed for reproducible results. Range: [-1, 2147483647]. "
-            "Default is -1 (random). Only works with v3 models "
-            "(doubao-seedream-3-0-t2i and doubao-seededit-3-0-i2i)."
         ),
     ] = None,
     sequential_image_generation: Annotated[
@@ -77,14 +66,6 @@ async def seedream_generate_image(
         Field(
             description="Stream all pictures progressively. Default is false. "
             "Only supports v4.5 and v4.0 models."
-        ),
-    ] = None,
-    guidance_scale: Annotated[
-        float | None,
-        Field(
-            description="Prompt weight — higher values make the result more closely follow the "
-            "prompt. Range: [1, 10]. Default is 2.5 for doubao-seedream-3-0-t2i. "
-            "Only works with v3 models."
         ),
     ] = None,
     response_format: Annotated[
@@ -146,8 +127,6 @@ async def seedream_generate_image(
     - v5.0 (doubao-seedream-5-0-260128): Latest flagship, highest quality
     - v4.5 (doubao-seedream-4-5-251128): Previous flagship, great quality and detail
     - v4.0 (doubao-seedream-4-0-250828): Stable and cost-effective, great for most tasks
-    - v3 T2I (doubao-seedream-3-0-t2i-250415): Supports seed for reproducibility
-
     Returns:
         JSON with task_id, trace_id, success status, and generated image data
         including image URLs.
@@ -159,16 +138,12 @@ async def seedream_generate_image(
 
     if size is not None:
         payload["size"] = size
-    if seed is not None:
-        payload["seed"] = seed
     if sequential_image_generation is not None:
         payload["sequential_image_generation"] = sequential_image_generation
     if sequential_image_generation_options is not None:
         payload["sequential_image_generation_options"] = sequential_image_generation_options
     if stream is not None:
         payload["stream"] = stream
-    if guidance_scale is not None:
-        payload["guidance_scale"] = guidance_scale
     if response_format is not None:
         payload["response_format"] = response_format
     if watermark is not None:
@@ -207,30 +182,14 @@ async def seedream_edit_image(
     model: Annotated[
         SeedreamModel,
         Field(
-            description="Model to use for editing. "
-            "'doubao-seededit-3-0-i2i-250628' (dedicated editing model, best for image "
-            "modification). Other models can also be used for editing when images are provided."
+            description="Model to use for editing. Seedream 5.0 Pro, 5.0 Lite, 4.5, and 4.0 "
+            "all support image editing when images are provided."
         ),
-    ] = "doubao-seededit-3-0-i2i-250628",
+    ] = "doubao-seedream-5-0-260128",
     size: Annotated[
         SeedreamSize | None,
         Field(
             description="Output image resolution. '1K' (default), '2K', '3K', '4K', or 'adaptive'."
-        ),
-    ] = None,
-    seed: Annotated[
-        int | None,
-        Field(
-            description="Random seed for reproducible edits. Range: [-1, 2147483647]. "
-            "Default is -1 (random). Only works with v3 models."
-        ),
-    ] = None,
-    guidance_scale: Annotated[
-        float | None,
-        Field(
-            description="Prompt weight — higher values make edits follow the prompt more closely. "
-            "Range: [1, 10]. Default is 5.5 for doubao-seededit-3-0-i2i. "
-            "Only works with v3 models."
         ),
     ] = None,
     response_format: Annotated[
@@ -282,10 +241,6 @@ async def seedream_edit_image(
 
     if size is not None:
         payload["size"] = size
-    if seed is not None:
-        payload["seed"] = seed
-    if guidance_scale is not None:
-        payload["guidance_scale"] = guidance_scale
     if response_format is not None:
         payload["response_format"] = response_format
     if watermark is not None:

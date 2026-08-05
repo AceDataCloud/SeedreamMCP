@@ -16,9 +16,8 @@ Generate and edit AI images directly from Claude, VS Code, or any MCP-compatible
 
 - **Text-to-Image Generation** — Create high-quality images from text prompts (Chinese & English)
 - **Image Editing** — Modify existing images with AI (style transfer, background change, virtual try-on)
-- **Multiple Models** — Seedream v5.0 (flagship), v4.5, v4.0, v3.0 T2I, SeedEdit v3.0 I2I
+- **Multiple Models** — Seedream v5.0 (flagship), v4.5, and v4.0
 - **Multi-Resolution** — 1K, 2K, 3K, 4K, adaptive, and custom dimensions
-- **Seed Control** — Reproducible results with seed parameter (v3 models)
 - **Sequential Generation** — Generate related images in sequence (v4.5/v4.0)
 - **Streaming** — Progressive image delivery (v4.5/v4.0)
 - **Task Tracking** — Monitor generation progress and retrieve results
@@ -337,8 +336,6 @@ Clients connect with their own Bearer token — the server extracts the token fr
 | `doubao-seedream-5-0-260128` | v5.0 Lite | Text-to-Image | Best quality, latest flagship, web search | ~$0.040/image |
 | `doubao-seedream-4-5-251128` | v4.5 | Text-to-Image | Previous flagship, great quality | ~$0.037/image |
 | `doubao-seedream-4-0-250828` | v4.0 | Text-to-Image | Best value, most tasks | ~$0.030/image |
-| `doubao-seedream-3-0-t2i-250415` | v3.0 | Text-to-Image | Reproducible results | ~$0.038/image |
-| `doubao-seededit-3-0-i2i-250628` | v3.0 | Image-to-Image | Image editing | ~$0.046/image |
 
 ## Usage Examples
 
@@ -369,15 +366,6 @@ User: 生成一幅中国山水画，有远山、流水和古松
 
 Claude: 好的，我来为您生成这幅山水画。
 [Calls seedream_generate_image with Chinese prompt]
-```
-
-### Reproducible Generation
-
-```
-User: Generate a landscape and make sure I can recreate the exact same image later
-
-Claude: I'll use the v3 model with a fixed seed.
-[Calls seedream_generate_image with model=doubao-seedream-3-0-t2i-250415, seed=42]
 ```
 
 ## Configuration

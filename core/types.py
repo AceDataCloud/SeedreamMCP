@@ -8,8 +8,6 @@ SeedreamModel = Literal[
     "doubao-seedream-5-0-260128",
     "doubao-seedream-4-5-251128",
     "doubao-seedream-4-0-250828",
-    "doubao-seedream-3-0-t2i-250415",
-    "doubao-seededit-3-0-i2i-250628",
 ]
 
 # Image size presets
