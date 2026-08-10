@@ -42,8 +42,7 @@ async def seedream_generate_image(
     size: Annotated[
         SeedreamSize | None,
         Field(
-            description="Output image resolution. '1K' (default), '2K', '3K', '4K', or 'adaptive'. "
-            "You can also specify custom dimensions like '1024x1024', '1280x720', etc."
+            description="Output image resolution. '1K' (default), '2K', '3K', or '4K'."
         ),
     ] = None,
     sequential_image_generation: Annotated[
@@ -189,7 +188,7 @@ async def seedream_edit_image(
     size: Annotated[
         SeedreamSize | None,
         Field(
-            description="Output image resolution. '1K' (default), '2K', '3K', '4K', or 'adaptive'."
+            description="Output image resolution. '1K' (default), '2K', '3K', or '4K'."
         ),
     ] = None,
     response_format: Annotated[

@@ -11,7 +11,7 @@ SeedreamModel = Literal[
 ]
 
 # Image size presets
-SeedreamSize = Literal["1K", "2K", "3K", "4K", "adaptive"]
+SeedreamSize = Literal["1K", "2K", "3K", "4K"]
 
 # Output image format
 OutputFormat = Literal["jpeg", "png"]
