@@ -17,7 +17,7 @@ Generate and edit AI images directly from Claude, VS Code, or any MCP-compatible
 - **Text-to-Image Generation** — Create high-quality images from text prompts (Chinese & English)
 - **Image Editing** — Modify existing images with AI (style transfer, background change, virtual try-on)
 - **Multiple Models** — Seedream v5.0 (flagship), v4.5, and v4.0
-- **Multi-Resolution** — 1K, 2K, 3K, 4K, adaptive, and custom dimensions
+- **Multi-Resolution** — 1K, 2K, 3K, 4K, and custom dimensions
 - **Sequential Generation** — Generate related images in sequence (v4.5/v4.0)
 - **Streaming** — Progressive image delivery (v4.5/v4.0)
 - **Task Tracking** — Monitor generation progress and retrieve results

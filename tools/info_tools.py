@@ -63,7 +63,7 @@ async def seedream_list_models() -> str:
 | Streaming | ❌ | ✅ | ✅ | ✅ |
 | Web Search | ❌ | ✅ | ❌ | ❌ |
 | Output Format | ✅ | ✅ | ❌ | ❌ |
-| Resolution | 1K/2K | 2K/3K/4K/Adaptive | 2K/4K/Adaptive | 1K/2K/4K/Adaptive |
+| Resolution | 1K/2K | 2K/3K/4K | 2K/4K | 1K/2K/4K |
 """
 
 
@@ -90,7 +90,6 @@ async def seedream_list_sizes() -> str:
 | `2K` | ~2048px | Higher detail, print-ready |
 | `3K` | ~3072px | High detail, large prints |
 | `4K` | ~4096px | Maximum quality, large prints |
-| `adaptive` | Auto-selected based on content | Let the model choose optimal size |
 
 ## Custom Dimensions
 
@@ -104,7 +103,6 @@ You can also specify exact dimensions in `WIDTHxHEIGHT` format:
 ## Tips
 - **1K** is fastest and most cost-effective
 - **4K** provides stunning detail but takes longer
-- **adaptive** is great when you're unsure about the best size
 - Custom dimensions give full control over aspect ratio
 - Supported presets vary by model; use the model table above before choosing a size
 """

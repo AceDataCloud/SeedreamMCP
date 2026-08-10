@@ -42,7 +42,8 @@ async def seedream_generate_image(
     size: Annotated[
         SeedreamSize | None,
         Field(
-            description="Output image resolution. '1K' (default), '2K', '3K', or '4K'."
+            description="Output image resolution. '1K' (default), '2K', '3K', or '4K'. "
+            "You can also specify custom dimensions like '1024x1024', '1280x720', etc."
         ),
     ] = None,
     sequential_image_generation: Annotated[
@@ -187,9 +188,7 @@ async def seedream_edit_image(
     ] = "doubao-seedream-5-0-260128",
     size: Annotated[
         SeedreamSize | None,
-        Field(
-            description="Output image resolution. '1K' (default), '2K', '3K', or '4K'."
-        ),
+        Field(description="Output image resolution. '1K' (default), '2K', '3K', or '4K'."),
     ] = None,
     response_format: Annotated[
         ResponseFormat | None,

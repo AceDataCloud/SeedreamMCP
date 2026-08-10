@@ -27,6 +27,28 @@ class TestFormatImageResult:
         assert data["task_id"] == "test-edit-789"
         assert len(data["data"]) == 1
 
+    def test_format_preserves_all_image_elements(self):
+        """Every image in the API data array should survive formatting unchanged."""
+        images = [
+            {
+                "prompt": "first image",
+                "image_url": "https://example.com/first.png",
+                "size": "2048x2048",
+                "metadata": {"index": 0},
+            },
+            {
+                "prompt": "second image",
+                "b64_json": "encoded-second-image",
+                "size": "4096x4096",
+                "metadata": {"index": 1},
+            },
+        ]
+        response = {"success": True, "task_id": "multi-123", "data": images}
+
+        data = json.loads(format_image_result(response))
+
+        assert data["data"] == images
+
     def test_format_error(self, mock_error_response):
         """Test formatting error response."""
         result = format_image_result(mock_error_response)
