@@ -513,6 +513,11 @@ This server wraps the [AceDataCloud Seedream API](https://platform.acedata.cloud
 - **Game Design** — Concept art, character design, environment design
 - **E-commerce** — Product mockups, lifestyle shots, banner images
 
+## Documentation
+
+<!-- canonical-documentation -->
+[Documentation](https://platform.acedata.cloud/documents/seedream-mcp)
+
 ## License
 
 [MIT License](LICENSE) - see the [LICENSE](LICENSE) file for details.

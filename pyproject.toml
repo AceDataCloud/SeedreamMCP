@@ -70,7 +70,7 @@ mcp-seedream-pro = "main:main"
 
 [project.urls]
 Homepage = "https://github.com/AceDataCloud/SeedreamMCP"
-Documentation = "https://platform.acedata.cloud/documents/seedream-images"
+Documentation = "https://platform.acedata.cloud/documents/seedream-mcp"
 Repository = "https://github.com/AceDataCloud/SeedreamMCP"
 Issues = "https://github.com/AceDataCloud/SeedreamMCP/issues"
 Changelog = "https://github.com/AceDataCloud/SeedreamMCP/blob/main/CHANGELOG.md"

@@ -56,7 +56,7 @@ Connects to the hosted MCP server at `seedream.mcp.acedata.cloud`. No local inst
 ## Links
 
 - [Ace Data Cloud Platform](https://platform.acedata.cloud)
-- [API Documentation](https://docs.acedata.cloud)
+- [Documentation](https://platform.acedata.cloud/documents/seedream-mcp)
 - [PyPI Package](https://pypi.org/project/mcp-seedream-pro/)
 - [Source Code](https://github.com/AceDataCloud/SeedreamMCP)
 

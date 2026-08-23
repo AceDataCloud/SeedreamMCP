@@ -59,7 +59,7 @@ For screenshots, token setup, project-level and user-level `mcp.json`, and Copil
 
 ## Pricing
 
-From $0.02 per image. Free trial credit on sign-up. See full pricing at [https://docs.acedata.cloud](https://docs.acedata.cloud).
+From $0.02 per image. Free trial credit on sign-up. See full pricing at [https://platform.acedata.cloud/documents/seedream-mcp](https://platform.acedata.cloud/documents/seedream-mcp).
 
 ---
 
@@ -131,7 +131,7 @@ version, install [`uv`](https://docs.astral.sh/uv/) and use:
 - **PyPI package:** [`mcp-seedream-pro`](https://pypi.org/project/mcp-seedream-pro/)
 - **Source repository:** https://github.com/AceDataCloud/SeedreamMCP
 - **Ace Data Cloud platform:** https://platform.acedata.cloud
-- **MCP documentation:** https://docs.acedata.cloud
+- **MCP documentation:** https://platform.acedata.cloud/documents/seedream-mcp
 
 ## License
 
