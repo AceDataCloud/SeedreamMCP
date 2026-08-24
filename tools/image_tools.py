@@ -202,6 +202,26 @@ async def seedream_edit_image(
         OutputFormat | None,
         Field(description="Output image format. 'jpeg' (default) or 'png'."),
     ] = None,
+    sequential_image_generation: Annotated[
+        SequentialMode | None,
+        Field(description="Generate related images based on input. 'auto' enables it."),
+    ] = None,
+    sequential_image_generation_options: Annotated[
+        dict | None,
+        Field(description="Tunable options for grouped image generation."),
+    ] = None,
+    stream: Annotated[
+        bool | None,
+        Field(description="Stream pictures progressively when supported."),
+    ] = None,
+    tools: Annotated[
+        list[WebSearchToolType] | None,
+        Field(description="Optional list of tool types for the model to use during editing."),
+    ] = None,
+    optimize_prompt_options: Annotated[
+        dict | None,
+        Field(description="Optional prompt optimization configuration."),
+    ] = None,
     callback_url: Annotated[
         str,
         Field(description="Optional webhook URL for async result notification."),
@@ -245,6 +265,16 @@ async def seedream_edit_image(
         payload["watermark"] = watermark
     if output_format is not None:
         payload["output_format"] = output_format
+    if sequential_image_generation is not None:
+        payload["sequential_image_generation"] = sequential_image_generation
+    if sequential_image_generation_options is not None:
+        payload["sequential_image_generation_options"] = sequential_image_generation_options
+    if stream is not None:
+        payload["stream"] = stream
+    if tools is not None:
+        payload["tools"] = [{"type": t} for t in tools]
+    if optimize_prompt_options is not None:
+        payload["optimize_prompt_options"] = optimize_prompt_options
     if callback_url:
         payload["callback_url"] = callback_url
 
