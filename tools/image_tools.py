@@ -7,6 +7,7 @@ from pydantic import Field
 from core.client import client
 from core.server import mcp
 from core.types import (
+    BackgroundMode,
     OutputFormat,
     ResponseFormat,
     SeedreamModel,
@@ -42,15 +43,14 @@ async def seedream_generate_image(
     size: Annotated[
         SeedreamSize | None,
         Field(
-            description="Output image resolution. '1K' (default), '2K', '3K', or '4K'. "
-            "You can also specify custom dimensions like '1024x1024', '1280x720', etc."
+            description="Model-specific output size: Pro supports 1K/1.5K/2K (and auto for decomposition); Lite supports 2K/3K/4K. Explicit dimensions such as 2048x1024 are also accepted."
         ),
     ] = None,
     sequential_image_generation: Annotated[
         SequentialMode | None,
         Field(
             description="Generate related images based on input. 'auto' enables it, 'disabled' "
-            "(default) turns it off. Only supports v4.5 and v4.0 models."
+            "(default) turns it off. Supported by Seedream 5.0 Lite, 4.5, and 4.0; not Pro."
         ),
     ] = None,
     sequential_image_generation_options: Annotated[
@@ -58,14 +58,7 @@ async def seedream_generate_image(
         Field(
             description="Tunable options for grouped image generation. Only honored when "
             "`sequential_image_generation=auto`. Supports `max_images` (int, range [1, 15]). "
-            "Only supported on doubao-seedream-4.5 and doubao-seedream-4.0."
-        ),
-    ] = None,
-    stream: Annotated[
-        bool | None,
-        Field(
-            description="Stream all pictures progressively. Default is false. "
-            "Only supports v4.5 and v4.0 models."
+            "Supported by Seedream 5.0 Lite, 4.5, and 4.0; not Pro."
         ),
     ] = None,
     response_format: Annotated[
@@ -142,8 +135,6 @@ async def seedream_generate_image(
         payload["sequential_image_generation"] = sequential_image_generation
     if sequential_image_generation_options is not None:
         payload["sequential_image_generation_options"] = sequential_image_generation_options
-    if stream is not None:
-        payload["stream"] = stream
     if response_format is not None:
         payload["response_format"] = response_format
     if watermark is not None:
@@ -188,7 +179,9 @@ async def seedream_edit_image(
     ] = "doubao-seedream-5-0-260128",
     size: Annotated[
         SeedreamSize | None,
-        Field(description="Output image resolution. '1K' (default), '2K', '3K', or '4K'."),
+        Field(
+            description="Model-specific output size or explicit dimensions. Pro supports 1K/1.5K/2K; Lite supports 2K/3K/4K."
+        ),
     ] = None,
     response_format: Annotated[
         ResponseFormat | None,
@@ -210,17 +203,21 @@ async def seedream_edit_image(
         dict | None,
         Field(description="Tunable options for grouped image generation."),
     ] = None,
-    stream: Annotated[
-        bool | None,
-        Field(description="Stream pictures progressively when supported."),
-    ] = None,
     tools: Annotated[
         list[WebSearchToolType] | None,
         Field(description="Optional list of tool types for the model to use during editing."),
     ] = None,
     optimize_prompt_options: Annotated[
         dict | None,
-        Field(description="Optional prompt optimization configuration."),
+        Field(
+            description="Prompt optimization. Pro supports standard/fast; Lite supports standard."
+        ),
+    ] = None,
+    background: Annotated[
+        BackgroundMode | None,
+        Field(
+            description="Seedream 5.0 Pro background mode. transparent requires one PNG input and PNG output."
+        ),
     ] = None,
     callback_url: Annotated[
         str,
@@ -269,14 +266,51 @@ async def seedream_edit_image(
         payload["sequential_image_generation"] = sequential_image_generation
     if sequential_image_generation_options is not None:
         payload["sequential_image_generation_options"] = sequential_image_generation_options
-    if stream is not None:
-        payload["stream"] = stream
     if tools is not None:
         payload["tools"] = [{"type": t} for t in tools]
     if optimize_prompt_options is not None:
         payload["optimize_prompt_options"] = optimize_prompt_options
+    if background is not None:
+        payload["background"] = background
     if callback_url:
         payload["callback_url"] = callback_url
 
+    result = await client.edit_image(**payload)
+    return format_image_result(result)
+
+
+@mcp.tool()
+async def seedream_decompose_image(
+    image: Annotated[str, Field(description="One PNG or JPEG URL/base64 image to decompose.")],
+    prompt: Annotated[
+        str,
+        Field(
+            description="Optional elements to decompose; omit for automatic decomposition. Supports <bbox> coordinates."
+        ),
+    ] = "",
+    size: Annotated[str, Field(description="Output size: auto, 1K, 1.5K, or 2K.")] = "auto",
+    output_format: Annotated[
+        OutputFormat, Field(description="Base image format; layers are always PNG.")
+    ] = "jpeg",
+    watermark: Annotated[
+        bool, Field(description="Whether to add an AI-generated watermark.")
+    ] = True,
+    callback_url: Annotated[
+        str, Field(description="Optional webhook URL for async delivery.")
+    ] = "",
+) -> str:
+    """Decompose one image into a base image and up to 16 editable transparent layers."""
+    payload: dict = {
+        "model": "doubao-seedream-5-0-pro-260628",
+        "image": image,
+        "layer_decomposition": True,
+        "size": size,
+        "output_format": output_format,
+        "watermark": watermark,
+    }
+    if prompt:
+        payload["prompt"] = prompt
+    if callback_url:
+        payload["callback_url"] = callback_url
     result = await client.edit_image(**payload)
     return format_image_result(result)

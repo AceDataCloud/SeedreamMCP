@@ -101,3 +101,26 @@ class TestFormatTaskResult:
         data = json.loads(result)
         assert data["count"] == 2
         assert len(data["items"]) == 2
+
+
+def test_image_formatter_preserves_layer_metadata() -> None:
+    result = {
+        "success": True,
+        "data": [
+            {
+                "image_url": "https://cdn.example/layer.png",
+                "z_index": 1,
+                "name": "title",
+                "description": "white title text",
+                "bounding_box": {
+                    "absolute": [10, 20, 110, 220],
+                    "normalized": [100, 200, 900, 950],
+                },
+            }
+        ],
+        "usage": {"generated_images": 2, "input_images": 1},
+    }
+    formatted = json.loads(format_image_result(result))
+    assert formatted["data"][0]["z_index"] == 1
+    assert formatted["data"][0]["bounding_box"]["absolute"] == [10, 20, 110, 220]
+    assert formatted["usage"]["input_images"] == 1

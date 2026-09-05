@@ -15,11 +15,12 @@ Generate and edit AI images directly from Claude, VS Code, or any MCP-compatible
 ## Features
 
 - **Text-to-Image Generation** — Create high-quality images from text prompts (Chinese & English)
-- **Image Editing** — Modify existing images with AI (style transfer, background change, virtual try-on)
+- **Image Editing** — Modify existing images, including transparent-background Pro edits
 - **Multiple Models** — Seedream v5.0 (flagship), v4.5, and v4.0
-- **Multi-Resolution** — 1K, 2K, 3K, 4K, and custom dimensions
-- **Sequential Generation** — Generate related images in sequence (v4.5/v4.0)
-- **Streaming** — Progressive image delivery (v4.5/v4.0)
+- **Layer Decomposition** — Split one image into a base plus up to 16 editable transparent PNG layers
+- **Multi-Resolution** — Pro 1K/1.5K/2K; Lite 2K/3K/4K; custom dimensions
+- **Sequential Generation** — Generate related images in sequence (5.0 Lite/4.5/4.0)
+- **Web Search** — Let 5.0 Lite use current web information when needed
 - **Task Tracking** — Monitor generation progress and retrieve results
 
 ## Tool Reference
@@ -27,11 +28,24 @@ Generate and edit AI images directly from Claude, VS Code, or any MCP-compatible
 | Tool | Description |
 |------|-------------|
 | `seedream_generate_image` | Generate an AI image from a text prompt using ByteDance's Seedream model. |
-| `seedream_edit_image` | Edit or modify existing images using ByteDance's Seedream/SeedEdit model. |
+| `seedream_edit_image` | Edit images, including Seedream 5.0 Pro transparent-background mode. |
+| `seedream_decompose_image` | Split one image into a base and up to 16 positioned transparent layers. |
 | `seedream_get_task` | Query the status and result of a Seedream image generation or edit task. |
 | `seedream_get_tasks_batch` | Query multiple Seedream image tasks at once. |
 | `seedream_list_models` | List all available Seedream models with their capabilities and pricing. |
 | `seedream_list_sizes` | List all available image sizes and resolution options for Seedream. |
+
+## Seedream 5.0 capability matrix
+
+| Capability | 5.0 Pro | 5.0 Lite |
+|---|---:|---:|
+| Single image generation/editing | Yes | Yes |
+| Layer decomposition / transparent background | Yes | No |
+| Sequential images / web search | No | Yes |
+| Prompt optimization | standard, fast | standard |
+| Preset sizes | 1K, 1.5K, 2K | 2K, 3K, 4K |
+
+MCP image tools submit asynchronously and return a task id. Use `seedream_get_task` until completion. For real-time NDJSON streaming, call the REST API or CLI rather than combining `stream` with MCP async submission.
 
 ## Quick Start
 
@@ -332,10 +346,10 @@ Clients connect with their own Bearer token — the server extracts the token fr
 
 | Model | Version | Type | Best For | Price |
 |-------|---------|------|----------|-------|
-| `doubao-seedream-5-0-pro-260628` | v5.0 Pro | Text-to-Image | Flagship single image, highest quality (no image sets/streaming/web search) | ~$0.044-0.088/image |
-| `doubao-seedream-5-0-260128` | v5.0 Lite | Text-to-Image | Best quality, latest flagship, web search | ~$0.040/image |
-| `doubao-seedream-4-5-251128` | v4.5 | Text-to-Image | Previous flagship, great quality | ~$0.037/image |
-| `doubao-seedream-4-0-250828` | v4.0 | Text-to-Image | Best value, most tasks | ~$0.030/image |
+| `doubao-seedream-5-0-pro-260628` | v5.0 Pro | Generate/Edit | Single image, transparent background, layer decomposition | Tiered Credits |
+| `doubao-seedream-5-0-260128` | v5.0 Lite | Text-to-Image | Best quality, latest flagship, web search | See live pricing |
+| `doubao-seedream-4-5-251128` | v4.5 | Text-to-Image | Previous flagship, great quality | See live pricing |
+| `doubao-seedream-4-0-250828` | v4.0 | Text-to-Image | Best value, most tasks | See live pricing |
 
 ## Usage Examples
 

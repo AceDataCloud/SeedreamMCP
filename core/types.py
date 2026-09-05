@@ -11,10 +11,13 @@ SeedreamModel = Literal[
 ]
 
 # Image size presets
-SeedreamSize = Literal["1K", "2K", "3K", "4K"]
+SeedreamSize = str
 
 # Output image format
 OutputFormat = Literal["jpeg", "png"]
+
+# Seedream 5.0 Pro background mode
+BackgroundMode = Literal["transparent", "opaque"]
 
 # Sequential image generation mode
 SequentialMode = Literal["auto", "disabled"]

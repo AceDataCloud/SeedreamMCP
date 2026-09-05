@@ -15,23 +15,24 @@ async def seedream_list_models() -> str:
     Returns:
         Formatted table of all Seedream models with descriptions.
     """
-    # Last updated: 2026-04-05
+    # Last updated: 2026-09-05
     return """# Available Seedream Models
 
 | Model | Version | Type | Features | Price |
 |-------|---------|------|----------|-------|
-| `doubao-seedream-5-0-pro-260628` | v5.0 Pro | Text-to-Image | Flagship single image, highest quality. No sequential/streaming/web search | ~$0.044-0.088/image |
-| `doubao-seedream-5-0-260128` | v5.0 Lite | Text-to-Image | Latest flagship, highest quality, sequential generation, streaming, web search | ~$0.040/image |
-| `doubao-seedream-4-5-251128` | v4.5 | Text-to-Image | Previous flagship, great quality, sequential generation, streaming | ~$0.037/image |
-| `doubao-seedream-4-0-250828` | v4.0 | Text-to-Image | Stable, cost-effective, sequential generation, streaming | ~$0.030/image |
+| `doubao-seedream-5-0-pro-260628` | v5.0 Pro | Generate/Edit | Flagship single image, transparent background, layer decomposition | Tiered Credits |
+| `doubao-seedream-5-0-260128` (alias: `doubao-seedream-5-0-lite-260128`) | v5.0 Lite | Generate/Edit | Sequential generation, streaming, web search | Per successful image |
+| `doubao-seedream-4-5-251128` | v4.5 | Generate/Edit | Previous flagship, sequential generation, streaming | Credits |
+| `doubao-seedream-4-0-250828` | v4.0 | Generate/Edit | Stable, sequential generation, streaming | Credits |
 
 ## Model Selection Guide
 
 ### For Best Quality (single image)
 → **doubao-seedream-5-0-pro-260628** (v5.0 Pro)
 - Flagship single-image model with highest quality
-- Best for professional/commercial single images
-- Note: does NOT support sequential generation, streaming, or web search
+- Best for professional/commercial single images, transparent edits, or layer decomposition
+- Supports 1K/1.5K/2K and prompt optimization standard/fast
+- Does NOT support sequential generation, streaming, or web search
 
 ### For Sequential / Streaming (v5.0)
 → **doubao-seedream-5-0-260128** (v5.0 Lite)
@@ -63,7 +64,11 @@ async def seedream_list_models() -> str:
 | Streaming | ❌ | ✅ | ✅ | ✅ |
 | Web Search | ❌ | ✅ | ❌ | ❌ |
 | Output Format | ✅ | ✅ | ❌ | ❌ |
-| Resolution | 1K/2K | 2K/3K/4K | 2K/4K | 1K/2K/4K |
+| Layer Decomposition | ✅ | ❌ | ❌ | ❌ |
+| Transparent Background | ✅ | ❌ | ❌ | ❌ |
+| Resolution | 1K/1.5K/2K | 2K/3K/4K | 2K/4K | 1K/2K/4K |
+
+See the live pricing page for current Credits: https://platform.acedata.cloud/services/seedream?tab=pricing
 """
 
 
@@ -79,29 +84,28 @@ async def seedream_list_sizes() -> str:
     Returns:
         Formatted list of all size options with descriptions.
     """
-    # Last updated: 2026-04-05
+    # Last updated: 2026-09-05
     return """# Seedream Image Size Options
 
 ## Preset Sizes
 
 | Size | Description | Best For |
 |------|-------------|----------|
-| `1K` | ~1024px (default) | General use, fast generation |
-| `2K` | ~2048px | Higher detail, print-ready |
+| `1K` | ~1024px | Pro and 4.0 |
+| `1.5K` | ~1536px | Pro; same tier as 1K |
+| `2K` | ~2048px | All current models |
 | `3K` | ~3072px | High detail, large prints |
 | `4K` | ~4096px | Maximum quality, large prints |
 
 ## Custom Dimensions
 
 You can also specify exact dimensions in `WIDTHxHEIGHT` format:
-- `1024x1024` — Square (1:1)
-- `1280x720` — Landscape (16:9)
-- `720x1280` — Portrait (9:16)
-- `1024x768` — Landscape (4:3)
-- `768x1024` — Portrait (3:4)
+- `2048x1024` — Wide (2:1)
+- `2048x2048` — Square (1:1)
+- `1536x3072` — Portrait (1:2)
 
 ## Tips
-- **1K** is fastest and most cost-effective
+- **1.5K** gives Pro more detail at the same price tier as 1K
 - **4K** provides stunning detail but takes longer
 - Custom dimensions give full control over aspect ratio
 - Supported presets vary by model; use the model table above before choosing a size
