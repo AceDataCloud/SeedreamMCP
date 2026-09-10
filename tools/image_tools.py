@@ -35,11 +35,11 @@ async def seedream_generate_image(
             description="Model to use for generation. "
             "'doubao-seedream-5-0-pro-260628' (v5.0 Pro, flagship single image, highest quality; "
             "no sequential generation, streaming, or web search). "
-            "'doubao-seedream-5-0-260128' (v5.0 Lite, latest flagship, sequential generation, streaming, web search). "
+            "'doubao-seedream-5-0-lite-260128' (v5.0 Lite, sequential generation, streaming, web search). "
             "'doubao-seedream-4-5-251128' (v4.5, previous flagship, great quality). "
             "'doubao-seedream-4-0-250828' (v4.0, stable, best value)."
         ),
-    ] = "doubao-seedream-5-0-260128",
+    ] = "doubao-seedream-5-0-lite-260128",
     size: Annotated[
         SeedreamSize | None,
         Field(
@@ -89,7 +89,7 @@ async def seedream_generate_image(
         Field(
             description="Optional list of tool types for the model to use during generation. "
             "Currently only 'web_search' is supported. "
-            "Only supported by doubao-seedream-5-0-260128 (v5.0)."
+            "Only supported by doubao-seedream-5-0-lite-260128 (v5.0 Lite)."
         ),
     ] = None,
     optimize_prompt_options: Annotated[
@@ -117,7 +117,7 @@ async def seedream_generate_image(
     - You need to combine multiple images (use seedream_edit_image instead)
 
     Model selection guide:
-    - v5.0 (doubao-seedream-5-0-260128): Latest flagship, highest quality
+    - v5.0 Lite (doubao-seedream-5-0-lite-260128): Image sets, streaming, and web search
     - v4.5 (doubao-seedream-4-5-251128): Previous flagship, great quality and detail
     - v4.0 (doubao-seedream-4-0-250828): Stable and cost-effective, great for most tasks
     Returns:
@@ -176,7 +176,7 @@ async def seedream_edit_image(
             description="Model to use for editing. Seedream 5.0 Pro, 5.0 Lite, 4.5, and 4.0 "
             "all support image editing when images are provided."
         ),
-    ] = "doubao-seedream-5-0-260128",
+    ] = "doubao-seedream-5-0-lite-260128",
     size: Annotated[
         SeedreamSize | None,
         Field(

@@ -23,8 +23,8 @@ When the user wants to generate or edit images, choose the appropriate tool base
 
 **Model selection:**
 - v5.0 Pro (`doubao-seedream-5-0-pro-260628`): Best single-image quality
-- v5.0 Lite (`doubao-seedream-5-0-260128`): Best for image sets, streaming, or web search
-- v4.5 (`doubao-seedream-4-5-251128`): Best quality, latest flagship
+- v5.0 Lite (`doubao-seedream-5-0-lite-260128`): Best for image sets, streaming, or web search
+- v4.5 (`doubao-seedream-4-5-251128`): Previous flagship with strong quality
 - v4.0 (`doubao-seedream-4-0-250828`): Best value, stable and reliable (recommended default)
 
 **Example:** "Create an image of a futuristic cityscape at sunset"
@@ -39,7 +39,7 @@ When the user wants to generate or edit images, choose the appropriate tool base
 - User wants to combine or transform images
 
 **Model selection:**
-- `doubao-seedream-5-0-260128`: Recommended for most edits
+- `doubao-seedream-5-0-lite-260128`: Recommended for most edits
 - 5.0 Pro, 4.5, and 4.0 also accept image input
 
 **Example:** "Change the background of this photo to a beach"
@@ -74,7 +74,7 @@ When the user wants to generate or edit images, choose the appropriate tool base
 2. After generate/edit submission, poll with `seedream_get_task` until the final image URLs are available
 2. Detailed prompts produce significantly better results
 3. Supports both Chinese and English prompts
-4. The v4.5 model produces the highest quality but costs slightly more
+4. The v4.5 model is the previous flagship and costs slightly more than Lite
 5. For editing, ensure image URLs are publicly accessible or use base64
 """
 
@@ -179,7 +179,7 @@ def seedream_workflow_examples() -> str:
      prompt="Change the background to outer space with stars and nebulae,
      keep the subject unchanged",
      image=["https://example.com/photo.jpg"],
-    model="doubao-seedream-5-0-260128"
+    model="doubao-seedream-5-0-lite-260128"
    )`
 
   ## Workflow 4: Sequential Image Generation

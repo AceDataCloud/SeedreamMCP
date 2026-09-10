@@ -21,7 +21,7 @@ async def seedream_list_models() -> str:
 | Model | Version | Type | Features | Price |
 |-------|---------|------|----------|-------|
 | `doubao-seedream-5-0-pro-260628` | v5.0 Pro | Generate/Edit | Flagship single image, transparent background, layer decomposition | Tiered Credits |
-| `doubao-seedream-5-0-260128` (alias: `doubao-seedream-5-0-lite-260128`) | v5.0 Lite | Generate/Edit | Sequential generation, streaming, web search | Per successful image |
+| `doubao-seedream-5-0-lite-260128` | v5.0 Lite | Generate/Edit | Sequential generation, streaming, web search | Per successful image |
 | `doubao-seedream-4-5-251128` | v4.5 | Generate/Edit | Previous flagship, sequential generation, streaming | Credits |
 | `doubao-seedream-4-0-250828` | v4.0 | Generate/Edit | Stable, sequential generation, streaming | Credits |
 
@@ -35,7 +35,7 @@ async def seedream_list_models() -> str:
 - Does NOT support sequential generation, streaming, or web search
 
 ### For Sequential / Streaming (v5.0)
-→ **doubao-seedream-5-0-260128** (v5.0 Lite)
+→ **doubao-seedream-5-0-lite-260128** (v5.0 Lite)
 - Latest flagship with sequential generation, streaming, web search
 - Best when you need image sets or progressive output
 
@@ -50,7 +50,7 @@ async def seedream_list_models() -> str:
 - Recommended for most use cases
 
 ### For Image Editing
-→ **doubao-seedream-5-0-260128** (v5.0 Lite)
+→ **doubao-seedream-5-0-lite-260128** (v5.0 Lite)
 - Accepts one or more input images
 - Best for style transfer, background changes, and multi-image composition
 

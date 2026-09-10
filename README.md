@@ -347,7 +347,7 @@ Clients connect with their own Bearer token — the server extracts the token fr
 | Model | Version | Type | Best For | Price |
 |-------|---------|------|----------|-------|
 | `doubao-seedream-5-0-pro-260628` | v5.0 Pro | Generate/Edit | Single image, transparent background, layer decomposition | Tiered Credits |
-| `doubao-seedream-5-0-260128` | v5.0 Lite | Text-to-Image | Best quality, latest flagship, web search | See live pricing |
+| `doubao-seedream-5-0-lite-260128` | v5.0 Lite | Text-to-Image | Sequential generation, streaming, web search | See live pricing |
 | `doubao-seedream-4-5-251128` | v4.5 | Text-to-Image | Previous flagship, great quality | See live pricing |
 | `doubao-seedream-4-0-250828` | v4.0 | Text-to-Image | Best value, most tasks | See live pricing |
 
