@@ -5,7 +5,7 @@ AI Image Generation with [ByteDance Seedream](https://www.volcengine.com) via [M
 <!-- Plugin description -->
 This plugin helps you set up the MCP ByteDance Seedream server with JetBrains AI Assistant.
 Once configured, AI Assistant can generate and edit images
-— all powered by [Ace Data Cloud](https://platform.acedata.cloud).
+— all powered by [Ace Data Cloud](https://platform.acedata.cloud?utm_source=jetbrains_marketplace&utm_medium=referral&utm_campaign=evergreen&utm_content=seedream_mcp_jetbrains_platform).
 
 **6 AI Tools** — Generate and edit images.
 <!-- Plugin description end -->
@@ -14,7 +14,7 @@ Once configured, AI Assistant can generate and edit images
 
 1. Install this plugin from the [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/com.acedatacloud.mcp.seedream)
 2. Open **Settings → Tools → Seedream MCP**
-3. Enter your [Ace Data Cloud](https://platform.acedata.cloud) API token
+3. Enter your [Ace Data Cloud](https://platform.acedata.cloud?utm_source=jetbrains_marketplace&utm_medium=referral&utm_campaign=evergreen&utm_content=seedream_mcp_jetbrains_platform) API token
 4. Click **Copy Config** (STDIO or HTTP)
 5. Paste into **Settings → Tools → AI Assistant → Model Context Protocol (MCP)**
 
@@ -55,8 +55,8 @@ Connects to the hosted MCP server at `seedream.mcp.acedata.cloud`. No local inst
 
 ## Links
 
-- [Ace Data Cloud Platform](https://platform.acedata.cloud)
-- [Documentation](https://platform.acedata.cloud/documents/seedream-mcp)
+- [Ace Data Cloud Platform](https://platform.acedata.cloud?utm_source=jetbrains_marketplace&utm_medium=referral&utm_campaign=evergreen&utm_content=seedream_mcp_jetbrains_platform)
+- [Documentation](https://platform.acedata.cloud/documents/seedream-mcp?utm_source=jetbrains_marketplace&utm_medium=referral&utm_campaign=evergreen&utm_content=seedream_mcp_jetbrains_quick_start)
 - [PyPI Package](https://pypi.org/project/mcp-seedream-pro/)
 - [Source Code](https://github.com/AceDataCloud/SeedreamMCP)
 

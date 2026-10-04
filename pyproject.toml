@@ -2,7 +2,7 @@
 name = "mcp-seedream-pro"
 version = "2026.4.5.0"
 description = "MCP Server for ByteDance Seedream AI Image Generation via AceDataCloud API"
-readme = "README.md"
+readme = "README.pypi.md"
 license = { text = "MIT" }
 requires-python = ">=3.10"
 authors = [
@@ -70,7 +70,7 @@ mcp-seedream-pro = "main:main"
 
 [project.urls]
 Homepage = "https://github.com/AceDataCloud/SeedreamMCP"
-Documentation = "https://platform.acedata.cloud/documents/seedream-mcp"
+Documentation = "https://platform.acedata.cloud/documents/seedream-mcp?utm_source=pypi&utm_medium=referral&utm_campaign=evergreen&utm_content=seedream_mcp_package_quick_start"
 Repository = "https://github.com/AceDataCloud/SeedreamMCP"
 Issues = "https://github.com/AceDataCloud/SeedreamMCP/issues"
 Changelog = "https://github.com/AceDataCloud/SeedreamMCP/blob/main/CHANGELOG.md"
@@ -90,6 +90,7 @@ include = [
     "tests/",
     "main.py",
     "README.md",
+    "README.pypi.md",
     "LICENSE",
     "CHANGELOG.md",
     ".env.example",
