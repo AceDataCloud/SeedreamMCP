@@ -3,6 +3,7 @@
 import asyncio
 from typing import Annotated
 
+from mcp.types import ToolAnnotations
 from pydantic import Field
 
 from core.client import client
@@ -10,7 +11,15 @@ from core.server import mcp
 from core.utils import format_task_result
 
 
-@mcp.tool()
+@mcp.tool(
+    title="Get Seedream task result",
+    annotations=ToolAnnotations(
+        readOnlyHint=True,
+        destructiveHint=False,
+        idempotentHint=True,
+        openWorldHint=True,
+    ),
+)
 async def seedream_get_task(
     task_id: Annotated[
         str,
@@ -53,7 +62,15 @@ async def seedream_get_task(
     return format_task_result(result)
 
 
-@mcp.tool()
+@mcp.tool(
+    title="Get Seedream task results in batch",
+    annotations=ToolAnnotations(
+        readOnlyHint=True,
+        destructiveHint=False,
+        idempotentHint=True,
+        openWorldHint=True,
+    ),
+)
 async def seedream_get_tasks_batch(
     task_ids: Annotated[
         list[str],

@@ -1,9 +1,19 @@
 """Information and reference tools for Seedream API."""
 
+from mcp.types import ToolAnnotations
+
 from core.server import mcp
 
 
-@mcp.tool()
+@mcp.tool(
+    title="List Seedream models",
+    annotations=ToolAnnotations(
+        readOnlyHint=True,
+        destructiveHint=False,
+        idempotentHint=True,
+        openWorldHint=False,
+    ),
+)
 async def seedream_list_models() -> str:
     """List all available Seedream models with their capabilities and pricing.
 
@@ -72,7 +82,15 @@ See the live pricing page for current Credits: https://platform.acedata.cloud/se
 """
 
 
-@mcp.tool()
+@mcp.tool(
+    title="List Seedream image sizes",
+    annotations=ToolAnnotations(
+        readOnlyHint=True,
+        destructiveHint=False,
+        idempotentHint=True,
+        openWorldHint=False,
+    ),
+)
 async def seedream_list_sizes() -> str:
     """List all available image sizes and resolution options for Seedream.
 

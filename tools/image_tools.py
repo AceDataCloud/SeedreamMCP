@@ -2,6 +2,7 @@
 
 from typing import Annotated
 
+from mcp.types import ToolAnnotations
 from pydantic import Field
 
 from core.client import client
@@ -18,7 +19,15 @@ from core.types import (
 from core.utils import format_image_result
 
 
-@mcp.tool()
+@mcp.tool(
+    title="Generate a Seedream image",
+    annotations=ToolAnnotations(
+        readOnlyHint=False,
+        destructiveHint=True,
+        idempotentHint=False,
+        openWorldHint=True,
+    ),
+)
 async def seedream_generate_image(
     prompt: Annotated[
         str,
@@ -152,7 +161,15 @@ async def seedream_generate_image(
     return format_image_result(result)
 
 
-@mcp.tool()
+@mcp.tool(
+    title="Edit an image with Seedream",
+    annotations=ToolAnnotations(
+        readOnlyHint=False,
+        destructiveHint=True,
+        idempotentHint=False,
+        openWorldHint=True,
+    ),
+)
 async def seedream_edit_image(
     prompt: Annotated[
         str,
@@ -279,7 +296,15 @@ async def seedream_edit_image(
     return format_image_result(result)
 
 
-@mcp.tool()
+@mcp.tool(
+    title="Decompose an image with Seedream",
+    annotations=ToolAnnotations(
+        readOnlyHint=False,
+        destructiveHint=True,
+        idempotentHint=False,
+        openWorldHint=True,
+    ),
+)
 async def seedream_decompose_image(
     image: Annotated[str, Field(description="One PNG or JPEG URL/base64 image to decompose.")],
     prompt: Annotated[
