@@ -106,7 +106,7 @@ async def seedream_generate_image(
         Field(
             description="Optional prompt optimization configuration. Supports `mode` with values "
             "'standard' (higher quality, slower) or 'fast' (quicker, lower quality). "
-            "Only supported on doubao-seedream-4.5 (standard mode only) and doubao-seedream-4.0."
+            "Seedream 5.0 Pro and 4.0 support standard/fast; 5.0 Lite and 4.5 support standard only."
         ),
     ] = None,
 ) -> str:
