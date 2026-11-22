@@ -8,7 +8,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![MCP](https://img.shields.io/badge/MCP-Compatible-green.svg)](https://modelcontextprotocol.io)
 
-A [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server for AI image generation and editing using [ByteDance's Seedream](https://www.volcengine.com/product/doubao) models through the [AceDataCloud API](https://platform.acedata.cloud?utm_source=github&utm_medium=referral&utm_campaign=evergreen&utm_content=seedream_mcp_readme_platform).
+A [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server for AI image generation and editing using [ByteDance's Seedream](https://www.volcengine.com/product/doubao) models through the [AceDataCloud API](https://platform.acedata.cloud?utm_source=github&utm_medium=referral&utm_campaign=evergreen).
 
 Generate and edit AI images directly from Claude, VS Code, or any MCP-compatible client.
 
@@ -51,7 +51,7 @@ MCP image tools submit asynchronously and return a task id. Use `seedream_get_ta
 
 After installation, discover the server's tools and call `seedream_list_models` with no arguments. This reference tool returns locally defined model or action information without calling a generation API. It does **not** validate your application key, account balance, service access, or current price. Your client's Chat model can still create separate charges.
 
-To check authenticated access without creating media, query a task already owned by your application using the task-lookup tool and the **same original task ID**. If you have no existing task, stop after discovery/reference output; do not generate media just to test installation. Review [current pricing](https://platform.acedata.cloud/models?utm_source=github&utm_medium=referral&utm_campaign=evergreen&utm_content=seedream_mcp_readme_models) before any new generation.
+To check authenticated access without creating media, query a task already owned by your application using the task-lookup tool and the **same original task ID**. If you have no existing task, stop after discovery/reference output; do not generate media just to test installation. Review [current pricing](https://platform.acedata.cloud/models?utm_source=github&utm_medium=referral&utm_campaign=evergreen) before any new generation.
 
 For missing tools, reconnect and refresh the tool list. For 401/403, check the existing application's key, service permissions, Allowed APIs, expiration and usage limit before replacing credentials. Keep a task/trace ID for other failures, never your key; do not automatically retry a paid operation.
 
@@ -65,7 +65,7 @@ The hosted endpoint is `https://seedream.mcp.acedata.cloud/mcp`. Choose one rout
 | Hosted API token | The client cannot finish OAuth, or you need an explicit integration credential | Send an AceDataCloud API token in the `Authorization: Bearer …` header. Keep it in a local secret store or environment variable. |
 | Local stdio | The client runs a local MCP process | Install `mcp-seedream-pro` and pass `ACEDATACLOUD_API_TOKEN` to that process. It still calls the AceDataCloud API. |
 
-The hosted service advertises OAuth metadata and Dynamic Client Registration (DCR). **DCR registers the client application; it is not an API key.** OAuth signs you in and the client sends the resulting Bearer token; it may reuse or create an API credential for the account. Browser sign-in still requires an AceDataCloud account. The hosted service can be metered: review [current service documentation](https://platform.acedata.cloud/documents/seedream-mcp?utm_source=github&utm_medium=referral&utm_campaign=evergreen&utm_content=seedream_mcp_readme_quick_start) and displayed pricing before a real operation. Do not configure both an OAuth login and a fixed `Authorization` header for the same server.
+The hosted service advertises OAuth metadata and Dynamic Client Registration (DCR). **DCR registers the client application; it is not an API key.** OAuth signs you in and the client sends the resulting Bearer token; it may reuse or create an API credential for the account. Browser sign-in still requires an AceDataCloud account. The hosted service can be metered: review [current service documentation](https://platform.acedata.cloud/documents/seedream-mcp?utm_source=github&utm_medium=referral&utm_campaign=evergreen) and displayed pricing before a real operation. Do not configure both an OAuth login and a fixed `Authorization` header for the same server.
 
 ### Hosted OAuth examples
 
@@ -98,8 +98,8 @@ VS Code-specific workspace config (OAuth):
 ### Hosted API token
 
 <!-- BEGIN TOKEN ONBOARDING -->
-1. Open [Ace Data Cloud → Applications](https://platform.acedata.cloud/console/applications?utm_source=github&utm_medium=referral&utm_campaign=evergreen&utm_content=seedream_mcp_readme_api_key). Sign in, or register an account first.
-2. Find **General application**. If it has not been created, choose **Initialize General Application**. A general key can use the services available to your account; a dedicated application's key is limited to its service. Check the required service/model access and [current pricing](https://platform.acedata.cloud/models?utm_source=github&utm_medium=referral&utm_campaign=evergreen&utm_content=seedream_mcp_readme_models).
+1. Open [Ace Data Cloud → Applications](https://platform.acedata.cloud/console/applications?utm_source=github&utm_medium=referral&utm_campaign=evergreen). Sign in, or register an account first.
+2. Find **General application**. If it has not been created, choose **Initialize General Application**. A general key can use the services available to your account; a dedicated application's key is limited to its service. Check the required service/model access and [current pricing](https://platform.acedata.cloud/models?utm_source=github&utm_medium=referral&utm_campaign=evergreen).
 3. Copy the **API Key** from the application card, or open **Keys / Manage Keys → Create** to create a separate key for this integration. Give it a recognizable name so you can revoke or rotate it independently.
 4. When creating a key, review **Expiration Time**, **Set Usage Limitation**, and **Allowed APIs**. Enable only the restrictions you need, allow the operations you will call, then click **Create** and copy the token from the key list. Task lookup does not grant permission to submit a generation. Confirm the application's balance can cover your first request; any trial allowance is whatever your account currently displays.
 5. Copy only the token value, without quotation marks, spaces, or `Bearer `. An API Key / API Token field expects this raw value; only a manually configured HTTP `Authorization` header needs the `Bearer ` prefix. A `platform-...` account-management token cannot replace a generation API key.
@@ -197,7 +197,7 @@ Keep this user-level file private. Self-hosted HTTP uses `mcp-seedream-pro --tra
 
 1. `https://seedream.mcp.acedata.cloud/health` returning `{"status":"ok"}` checks endpoint reachability only.
 2. Confirm that the MCP client loads tools. `seedream_list_models` is a local reference tool with no generation API charge; it does not verify downstream API access or balance. Generation, editing, and decomposition create credit-consuming tasks and are marked as non-read-only operations. These annotations describe the operation; the client's version, permission settings, and organization policy determine whether it asks for approval. Review the input and current price before allowing a paid operation.
-3. If you need a full API check, call `seedream_generate_image` with your own valid input after reviewing [current service documentation](https://platform.acedata.cloud/documents/seedream-mcp?utm_source=github&utm_medium=referral&utm_campaign=evergreen&utm_content=seedream_mcp_readme_quick_start) and displayed pricing. If the result contains a task ID, call `seedream_get_task` on that same ID until terminal success or failure. Do not resubmit the operation just to check progress.
+3. If you need a full API check, call `seedream_generate_image` with your own valid input after reviewing [current service documentation](https://platform.acedata.cloud/documents/seedream-mcp?utm_source=github&utm_medium=referral&utm_campaign=evergreen) and displayed pricing. If the result contains a task ID, call `seedream_get_task` on that same ID until terminal success or failure. Do not resubmit the operation just to check progress.
 
 For **401**, check which auth route the client used and whether the token or OAuth session is valid. A **403** may mean an account permission or content moderation failure; read the returned error. Insufficient balance and downstream service failures need their own diagnosis. A listed tool or submitted task does not prove a successful result.
 
@@ -394,10 +394,10 @@ SeedreamMCP/
 
 ## API Reference
 
-This server wraps the [AceDataCloud Seedream API](https://platform.acedata.cloud/documents/seedream-images?utm_source=github&utm_medium=referral&utm_campaign=evergreen&utm_content=seedream_mcp_readme_documents_seedream-images):
+This server wraps the [AceDataCloud Seedream API](https://platform.acedata.cloud/documents/seedream-images?utm_source=github&utm_medium=referral&utm_campaign=evergreen):
 
-- [Seedream Images API](https://platform.acedata.cloud/documents/seedream-images?utm_source=github&utm_medium=referral&utm_campaign=evergreen&utm_content=seedream_mcp_readme_documents_seedream-images) — Image generation and editing
-- [Seedream Tasks API](https://platform.acedata.cloud/documents/seedream-tasks?utm_source=github&utm_medium=referral&utm_campaign=evergreen&utm_content=seedream_mcp_readme_documents_seedream-tasks) — Task queries
+- [Seedream Images API](https://platform.acedata.cloud/documents/seedream-images?utm_source=github&utm_medium=referral&utm_campaign=evergreen) — Image generation and editing
+- [Seedream Tasks API](https://platform.acedata.cloud/documents/seedream-tasks?utm_source=github&utm_medium=referral&utm_campaign=evergreen) — Task queries
 
 ## Use Cases
 
@@ -412,7 +412,7 @@ This server wraps the [AceDataCloud Seedream API](https://platform.acedata.cloud
 ## Documentation
 
 <!-- canonical-documentation -->
-[Documentation](https://platform.acedata.cloud/documents/seedream-mcp?utm_source=github&utm_medium=referral&utm_campaign=evergreen&utm_content=seedream_mcp_readme_quick_start)
+[Documentation](https://platform.acedata.cloud/documents/seedream-mcp?utm_source=github&utm_medium=referral&utm_campaign=evergreen)
 
 ## License
 
@@ -420,8 +420,8 @@ This server wraps the [AceDataCloud Seedream API](https://platform.acedata.cloud
 
 ## Links
 
-- [AceDataCloud Platform](https://platform.acedata.cloud?utm_source=github&utm_medium=referral&utm_campaign=evergreen&utm_content=seedream_mcp_readme_platform)
-- [Seedream API Documentation](https://platform.acedata.cloud/documents/seedream-images?utm_source=github&utm_medium=referral&utm_campaign=evergreen&utm_content=seedream_mcp_readme_documents_seedream-images)
+- [AceDataCloud Platform](https://platform.acedata.cloud?utm_source=github&utm_medium=referral&utm_campaign=evergreen)
+- [Seedream API Documentation](https://platform.acedata.cloud/documents/seedream-images?utm_source=github&utm_medium=referral&utm_campaign=evergreen)
 - [MCP Protocol](https://modelcontextprotocol.io)
 - [GitHub Repository](https://github.com/AceDataCloud/SeedreamMCP)
 - [PyPI Package](https://pypi.org/project/mcp-seedream-pro/)
