@@ -25,11 +25,12 @@ async def seedream_list_models() -> str:
     Returns:
         Formatted table of all Seedream models with descriptions.
     """
-    # Last updated: 2026-09-05
     return """# Available Seedream Models
 
 | Model | Version | Type | Features | Price |
 |-------|---------|------|----------|-------|
+| `doubao-seedream-5-5-261028` | v5.5 | Generate/Edit | Multi-turn editing, native transparent output, and layers with OCR | Tiered Credits |
+| `doubao-seedream-5-0-flash-260915` | v5.0 Flash | Generate/Edit | Fast single images and editable layers | Per successful image |
 | `doubao-seedream-5-0-pro-260628` | v5.0 Pro | Generate/Edit | Flagship single image, transparent background, layer decomposition | Tiered Credits |
 | `doubao-seedream-5-0-lite-260128` | v5.0 Lite | Generate/Edit | Sequential generation, streaming, web search | Per successful image |
 | `doubao-seedream-4-5-251128` | v4.5 | Generate/Edit | Previous flagship, sequential generation, streaming | Credits |
@@ -37,7 +38,13 @@ async def seedream_list_models() -> str:
 
 ## Model Selection Guide
 
-### For Best Quality (single image)
+### For Native Transparent Images or Layers with OCR
+→ **doubao-seedream-5-5-261028** (v5.5)
+
+### For Fast Generation and Editing
+→ **doubao-seedream-5-0-flash-260915** (v5.0 Flash)
+
+### For Prompt Optimization in Fast Mode
 → **doubao-seedream-5-0-pro-260628** (v5.0 Pro)
 - Flagship single-image model with highest quality
 - Best for professional/commercial single images, transparent edits, or layer decomposition
@@ -46,7 +53,7 @@ async def seedream_list_models() -> str:
 
 ### For Sequential / Streaming (v5.0)
 → **doubao-seedream-5-0-lite-260128** (v5.0 Lite)
-- Latest flagship with sequential generation, streaming, web search
+- Supports sequential generation, streaming, web search
 - Best when you need image sets or progressive output
 
 ### For Previous Flagship Quality

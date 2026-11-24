@@ -4,10 +4,17 @@ from typing import Literal
 
 # Seedream model types
 SeedreamModel = Literal[
+    "doubao-seedream-5-5-261028",
+    "doubao-seedream-5-0-flash-260915",
     "doubao-seedream-5-0-pro-260628",
     "doubao-seedream-5-0-lite-260128",
     "doubao-seedream-4-5-251128",
     "doubao-seedream-4-0-250828",
+]
+SeedreamLayerModel = Literal[
+    "doubao-seedream-5-5-261028",
+    "doubao-seedream-5-0-pro-260628",
+    "doubao-seedream-5-0-flash-260915",
 ]
 
 # Image size presets
@@ -16,8 +23,7 @@ SeedreamSize = str
 # Output image format
 OutputFormat = Literal["jpeg", "png"]
 
-# Seedream 5.0 Pro background mode
-BackgroundMode = Literal["transparent", "opaque"]
+BackgroundMode = Literal["auto", "transparent", "opaque"]
 
 # Sequential image generation mode
 SequentialMode = Literal["auto", "disabled"]

@@ -16,8 +16,8 @@ Generate and edit AI images directly from Claude, VS Code, or any MCP-compatible
 
 - **Text-to-Image Generation** — Create high-quality images from text prompts (Chinese & English)
 - **Image Editing** — Modify existing images, including transparent-background Pro edits
-- **Multiple Models** — Seedream v5.0 (flagship), v4.5, and v4.0
-- **Layer Decomposition** — Split one image into a base plus up to 16 editable transparent PNG layers
+- **Multiple Models** — Seedream 5.5, 5.0 Flash/Pro/Lite, 4.5, and 4.0
+- **Layer Decomposition** — Split one image into a base and up to 99 editable layers with Seedream 5.5
 - **Multi-Resolution** — Pro 1K/1.5K/2K; Lite 2K/3K/4K; custom dimensions
 - **Sequential Generation** — Generate related images in sequence (5.0 Lite/4.5/4.0)
 - **Web Search** — Let 5.0 Lite use current web information when needed
@@ -29,13 +29,15 @@ Generate and edit AI images directly from Claude, VS Code, or any MCP-compatible
 |------|-------------|
 | `seedream_generate_image` | Generate an AI image from a text prompt using ByteDance's Seedream model. |
 | `seedream_edit_image` | Edit images, including Seedream 5.0 Pro transparent-background mode. |
-| `seedream_decompose_image` | Split one image into a base and up to 16 positioned transparent layers. |
+| `seedream_decompose_image` | Split one image into a base and positioned layers. Seedream 5.5 supports styled OCR. |
 | `seedream_get_task` | Query the status and result of a Seedream image generation or edit task. |
 | `seedream_get_tasks_batch` | Query multiple Seedream image tasks at once. |
 | `seedream_list_models` | List all available Seedream models with their capabilities and pricing. |
 | `seedream_list_sizes` | List all available image sizes and resolution options for Seedream. |
 
-## Seedream 5.0 capability matrix
+## Seedream capabilities
+
+Use `doubao-seedream-5-5-261028` for native transparent text-to-image, or select it in `seedream_decompose_image` to set `max_images` and enable `text_recognition`. Use `doubao-seedream-5-0-flash-260915` for fast single-image generation, reference editing and layer decomposition.
 
 | Capability | 5.0 Pro | 5.0 Lite |
 |---|---:|---:|
@@ -228,6 +230,8 @@ For **401**, check which auth route the client used and whether the token or OAu
 
 | Model | Version | Type | Best For | Price |
 |-------|---------|------|----------|-------|
+| `doubao-seedream-5-5-261028` | v5.5 | Generate/Edit | Native transparent output, layers with OCR | Tiered Credits |
+| `doubao-seedream-5-0-flash-260915` | v5.0 Flash | Generate/Edit | Fast single-image generation and layers | Per successful image |
 | `doubao-seedream-5-0-pro-260628` | v5.0 Pro | Generate/Edit | Single image, transparent background, layer decomposition | Tiered Credits |
 | `doubao-seedream-5-0-lite-260128` | v5.0 Lite | Text-to-Image | Sequential generation, streaming, web search | See live pricing |
 | `doubao-seedream-4-5-251128` | v4.5 | Text-to-Image | Previous flagship, great quality | See live pricing |

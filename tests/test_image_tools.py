@@ -50,3 +50,22 @@ async def test_decomposition_tool_builds_official_payload(monkeypatch) -> None:
         output_format="jpeg",
         watermark=True,
     )
+
+
+async def test_seedream_55_decomposition_forwards_ocr_and_output_limit(monkeypatch) -> None:
+    from unittest.mock import AsyncMock
+
+    from tools.image_tools import seedream_decompose_image
+
+    request = AsyncMock(return_value={"task_id": "layer-task"})
+    monkeypatch.setattr("tools.image_tools.client.edit_image", request)
+    await seedream_decompose_image(
+        image="https://cdn.example/poster.png",
+        model="doubao-seedream-5-5-261028",
+        max_images=8,
+        text_recognition=True,
+    )
+    assert request.await_args.kwargs["layer_decomposition_options"] == {
+        "max_images": 8,
+        "text_recognition": True,
+    }

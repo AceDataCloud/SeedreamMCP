@@ -11,6 +11,7 @@ from core.types import (
     BackgroundMode,
     OutputFormat,
     ResponseFormat,
+    SeedreamLayerModel,
     SeedreamModel,
     SeedreamSize,
     SequentialMode,
@@ -42,8 +43,9 @@ async def seedream_generate_image(
         SeedreamModel,
         Field(
             description="Model to use for generation. "
-            "'doubao-seedream-5-0-pro-260628' (v5.0 Pro, flagship single image, highest quality; "
-            "no sequential generation, streaming, or web search). "
+            "'doubao-seedream-5-5-261028' (5.5, transparent generation and multi-turn editing). "
+            "'doubao-seedream-5-0-flash-260915' (5.0 Flash, fast generation and editing). "
+            "'doubao-seedream-5-0-pro-260628' (5.0 Pro, single images and editable layers). "
             "'doubao-seedream-5-0-lite-260128' (v5.0 Lite, sequential generation, streaming, web search). "
             "'doubao-seedream-4-5-251128' (v4.5, previous flagship, great quality). "
             "'doubao-seedream-4-0-250828' (v4.0, stable, best value)."
@@ -109,6 +111,12 @@ async def seedream_generate_image(
             "Seedream 5.0 Pro and 4.0 support standard/fast; 5.0 Lite and 4.5 support standard only."
         ),
     ] = None,
+    background: Annotated[
+        BackgroundMode | None,
+        Field(
+            description="Use Seedream 5.5 with transparent for transparent text-to-image output."
+        ),
+    ] = None,
 ) -> str:
     """Generate an AI image from a text prompt using ByteDance's Seedream model.
 
@@ -156,6 +164,8 @@ async def seedream_generate_image(
         payload["tools"] = [{"type": t} for t in tools]
     if optimize_prompt_options is not None:
         payload["optimize_prompt_options"] = optimize_prompt_options
+    if background is not None:
+        payload["background"] = background
 
     result = await client.generate_image(**payload)
     return format_image_result(result)
@@ -190,8 +200,7 @@ async def seedream_edit_image(
     model: Annotated[
         SeedreamModel,
         Field(
-            description="Model to use for editing. Seedream 5.0 Pro, 5.0 Lite, 4.5, and 4.0 "
-            "all support image editing when images are provided."
+            description="Model to use for editing. Seedream 5.5 and 5.0 Flash support up to ten reference images."
         ),
     ] = "doubao-seedream-5-0-lite-260128",
     size: Annotated[
@@ -233,7 +242,8 @@ async def seedream_edit_image(
     background: Annotated[
         BackgroundMode | None,
         Field(
-            description="Seedream 5.0 Pro background mode. transparent requires one PNG input and PNG output."
+            description="5.5 supports auto, transparent and opaque. 5.0 Pro/Flash transparent edits "
+            "require one reference image with transparency and PNG output."
         ),
     ] = None,
     callback_url: Annotated[
@@ -323,16 +333,38 @@ async def seedream_decompose_image(
     callback_url: Annotated[
         str, Field(description="Optional webhook URL for async delivery.")
     ] = "",
+    model: SeedreamLayerModel = "doubao-seedream-5-0-pro-260628",
+    max_images: Annotated[
+        int | None,
+        Field(
+            ge=2, le=100, description="Seedream 5.5 maximum image count, including the base image."
+        ),
+    ] = None,
+    text_recognition: Annotated[
+        bool | None,
+        Field(description="Return styled OCR for recognized text layers in Seedream 5.5."),
+    ] = None,
 ) -> str:
-    """Decompose one image into a base image and up to 16 editable transparent layers."""
+    """Split an image into a base image and editable layers. Seedream 5.5 supports up to 99 layers and OCR."""
     payload: dict = {
-        "model": "doubao-seedream-5-0-pro-260628",
+        "model": model,
         "image": image,
         "layer_decomposition": True,
         "size": size,
         "output_format": output_format,
         "watermark": watermark,
     }
+    if max_images is not None or text_recognition is not None:
+        if model != "doubao-seedream-5-5-261028":
+            raise ValueError("max_images and text_recognition require Seedream 5.5")
+        payload["layer_decomposition_options"] = {
+            key: value
+            for key, value in {
+                "max_images": max_images,
+                "text_recognition": text_recognition,
+            }.items()
+            if value is not None
+        }
     if prompt:
         payload["prompt"] = prompt
     if callback_url:
